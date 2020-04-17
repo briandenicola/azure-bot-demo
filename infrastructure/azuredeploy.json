@@ -133,9 +133,6 @@
             "dependsOn": [
                 "[resourceId('Microsoft.Web/sites', parameters('appServiceName'))]"
             ],
-            "tags": {
-                "AssetTag": "DevGroup-Alpha"
-            },
             "properties":{
                 "webSocketsEnabled": true,
                 "cors": {
@@ -157,7 +154,7 @@
             "location": "[parameters('location')]",
             "dependsOn": [
                     "[concat('Microsoft.Web/sites/', parameters('appServiceName'))]",
-                    "[concat('Microsoft.CognitiveServices/accounts', parameters('luisName'))]"
+                    "[concat('Microsoft.CognitiveServices/accounts/', parameters('luisName'))]"
             ],
             "properties" : {
                 "LuisAPIHostName": "[variables('luisHostName')]",
@@ -165,7 +162,8 @@
                 "LuisAppId": "Update this with Application ID for bot from luis.ai portal",
                 "MicrosoftAppId": "[parameters('botApplicationId')]",
                 "MicrosoftAppPassworrd": "[parameters('botApplicationSecret')]",
-                "ConnectionName": "AzureAD"
+                "ConnectionName": "AzureAD",
+                "WebBotName": "[parameters('botName')]"
             }
         }
     ]
