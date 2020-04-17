@@ -8,6 +8,8 @@ trigger:
     - infrastructure/*
 
 variables:
+  connectedServiceName: ''
+  WebAppName: ''
 
 pool:
   name: Azure Pipelines
@@ -21,7 +23,7 @@ steps:
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
   inputs:
-    projects: '**/*.csproj'
+    projects: 'src/**/*.csproj'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet publish'
@@ -32,7 +34,7 @@ steps:
 - task: AzureWebApp@1
   displayName: 'Azure Web App Deploy: bjdbotdemo001'
   inputs:
-    azureSubscription: '$(Parameters.connectedServiceName)'
+    azureSubscription: '$(connectedServiceName)'
     appType: webApp
-    appName: '$(Parameters.WebAppName)'
+    appName: '$(WebAppName)'
     package: '$(System.DefaultWorkingDirectory)/**/*.zip '
