@@ -1,0 +1,38 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - deploy/*
+    - infrastructure/*
+
+variables:
+
+pool:
+  name: Azure Pipelines
+
+steps:
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet 4.4.1'
+  inputs:
+    versionSpec: 4.4.1
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    projects: '**/*.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
+  inputs:
+    command: publish
+    modifyOutputPath: false
+
+- task: AzureWebApp@1
+  displayName: 'Azure Web App Deploy: bjdbotdemo001'
+  inputs:
+    azureSubscription: '$(Parameters.connectedServiceName)'
+    appType: webApp
+    appName: '$(Parameters.WebAppName)'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip '
