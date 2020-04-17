@@ -6,14 +6,14 @@
 <script>
 
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', "https://bjdbotdemo001.azurewebsites.net/api/tokens", true);
+    xhr.open('GET', "https://bjdbot010-api.azurewebsites.net/api/tokens", true);
     xhr.send();
     xhr.onreadystatechange = processRequest;
 
     function processRequest(e) {
       if (xhr.readyState == 4  && xhr.status == 200) {
         var response = JSON.parse(xhr.responseText);
-        document.getElementById("chat").src="https://webchat.botframework.com/embed/bjdbotdemo001?t="+response
+        document.getElementById("chat").src="https://webchat.botframework.com/embed/bjdbot010?t="+response
       }
     }
 
