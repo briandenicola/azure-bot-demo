@@ -14,10 +14,7 @@ namespace Microsoft.BotBuilderSamples.Dialogs
         private const string HelpMsgText = "Show help here";
         private const string CancelMsgText = "Cancelling...";
 
-        public CancelAndHelpDialog(string id)
-            : base(id)
-        {
-        }
+        public CancelAndHelpDialog(string id) : base(id) { }
 
         protected override async Task<DialogTurnResult> OnContinueDialogAsync(DialogContext innerDc, CancellationToken cancellationToken = default)
         {

@@ -15,7 +15,10 @@ namespace Microsoft.BotBuilderSamples
 
         public FlightBookingRecognizer(IConfiguration configuration)
         {
-            var luisIsConfigured = !string.IsNullOrEmpty(configuration["LuisAppId"]) && !string.IsNullOrEmpty(configuration["LuisAPIKey"]) && !string.IsNullOrEmpty(configuration["LuisAPIHostName"]);
+            var luisIsConfigured = !string.IsNullOrEmpty(configuration["LuisAppId"]) && 
+                !string.IsNullOrEmpty(configuration["LuisAPIKey"]) && 
+                !string.IsNullOrEmpty(configuration["LuisAPIHostName"]);
+                
             if (luisIsConfigured)
             {
                 var luisApplication = new LuisApplication(
