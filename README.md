@@ -6,8 +6,8 @@ Bot Framework bot sample with Azure AD Authentication
 ## Manual Steps
     * Create Azure AD Service Principal for Bot
         * $botPass = New-Password -Length 25 (Function from bjd.Common.Functions)
-        * $botAppId = $(az ad sp create-for-rbac --name bjdBotApp01 --query 'appId' -o tsv) 
-        * az ad sp credential reset --name bjdBotApp01 --password $botPass --credential-description "default" --years 2
+        * $botAppId = $(az ad app create --display-name bjdBotApp01 --oauth2-allow-implicit-flow false --available-to-other-tenants  --query 'appId' -o tsv) 
+        * az ad sp credential reset --name $botAppId --password $botPass --credential-description "default" --years 2
     * Create Azure AD Service Principal for Bot Authentication 
         * $botAuthPass = New-Password -Length 25 (Function from bjd.Common.Functions)
         * $botAuthId = $(az ad app create --display-name bjdBotAuth01 --reply-urls https://token.botframework.com/.auth/web/redirect --required-resource-accesses @infrastructure\azuread-manifest.json --query 'appId' -o tsv) 
