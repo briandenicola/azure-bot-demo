@@ -161,7 +161,7 @@
                 "LuisAPIKey": "[listKeys(parameters('luisName'),'2017-04-18').key1]",
                 "LuisAppId": "Update this with Application ID for bot from luis.ai portal",
                 "MicrosoftAppId": "[parameters('botApplicationId')]",
-                "MicrosoftAppPassworrd": "[parameters('botApplicationSecret')]",
+                "MicrosoftAppPassword": "[parameters('botApplicationSecret')]",
                 "ConnectionName": "AzureAD",
                 "WebBotName": "[parameters('botName')]"
             }

@@ -48,7 +48,8 @@ Bot Framework bot sample with Azure AD Authentication
         * Update wwwroot\index.html with proper Bot Name
         * cd src
         * dotnet build
-        * dotnet publish -o publish 
+        * dotnet publish -o publish
+        * copy -Recurse .\Cards\ .\publish\.
         * Compress-Archive -Path .\publish\* -DestinationPath bot.zip
         * az webapp deployment source config-zip --resource-group BOT_RG --name bjdbot010-api --src .\bot.zip
 
