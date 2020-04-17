@@ -20,11 +20,15 @@
         },
         "botApplicationId": {
             "type": "string"
+        },
+        "botApplicationSecret": {
+            "type": "securestring"
         }
     },
     "variables": {
         "WebChatChannelPreview": true,
-        "luisLocation": "westus"
+        "luisLocation": "westus",
+        "luisHostName": "[concat(variables('luisLocation'),'.api.cognitive.microsoft.com')]"
     },
     "resources": [
         {
@@ -32,6 +36,9 @@
             "apiVersion": "2018-07-12",
             "name": "[parameters('botName')]",
             "location": "global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/sites/', parameters('appServiceName'))]"
+            ],
             "sku": {
                 "name": "F0"
             },
@@ -140,7 +147,25 @@
                     ],
                     "supportCredentials": false
                 },
-                "minTlsVersion": "1.2",
+                "minTlsVersion": "1.2"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites/config",
+            "apiVersion": "2018-11-01",
+            "name": "[concat(parameters('appServiceName'), '/appsettings')]",
+            "location": "[parameters('location')]",
+            "dependsOn": [
+                    "[concat('Microsoft.Web/sites/', parameters('appServiceName'))]",
+                    "[concat('Microsoft.CognitiveServices/accounts', parameters('luisName'))]"
+            ],
+            "properties" : {
+                "LuisAPIHostName": "[variables('luisHostName')]",
+                "LuisAPIKey": "[listKeys(parameters('luisName'),'2017-04-18').key1]",
+                "LuisAppId": "Update this with Application ID for bot from luis.ai portal",
+                "MicrosoftAppId": "[parameters('botApplicationId')]",
+                "MicrosoftAppPassworrd": "[parameters('botApplicationSecret')]",
+                "ConnectionName": "AzureAD"
             }
         }
     ]
