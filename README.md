@@ -54,4 +54,4 @@ _Actual account passwords are not reset_
     * Update Variables for Service Connection and Azure App Service Name 
 
 # Bot
-![Bot Screenshot](./artifacts/bot.png)
+![Bot Screenshot](./artifacts/screenshot.png)
