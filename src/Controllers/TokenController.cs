@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
-namespace Microsoft.BotBuilderSamples.Controllers
+namespace Microsoft.Bot.Builder.ComposerBot.Json
 {
     [Route("api/tokens")]
     [ApiController]

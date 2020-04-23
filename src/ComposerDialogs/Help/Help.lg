@@ -1,0 +1,9 @@
+[import](common.lg)
+
+# bfdactivity-118915()
+- ${help()}   
+
+#help   
+- I can help you perform basic IT tasks. Say `reset password`
+- Hello there.  I'm a simple bot to help you reset passwords.  You can type `reset password` or `reset account`
+-  Looks like you need help. I am a password reset bot.  You can type `reset password` or `reset account`

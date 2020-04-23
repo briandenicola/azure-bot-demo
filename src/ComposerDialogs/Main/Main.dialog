@@ -1,0 +1,106 @@
+{
+  "$type": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "$designer": {
+      "name": "ITBot",
+      "id": "292942"
+    }
+  },
+  "autoEndDialog": "true",
+  "defaultResultProperty": "dialog.result",
+  "recognizer": "Main.lu",
+  "triggers": [
+    {
+      "$type": "Microsoft.OnConversationUpdateActivity",
+      "$designer": {
+        "id": "376720"
+      },
+      "actions": [
+        {
+          "$type": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "594482",
+            "name": "Send a response"
+          },
+          "activity": "${bfdactivity-594482()}"
+        }
+      ]
+    },
+    {
+      "$type": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "603211"
+      },
+      "condition": "#Cancel.Score >= 0.8",
+      "intent": "Cancel",
+      "actions": [
+        {
+          "$type": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "786427",
+            "name": "Begin a new dialog"
+          },
+          "activityProcessed": true,
+          "dialog": "Cancel"
+        }
+      ]
+    },
+    {
+      "$type": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "322464"
+      },
+      "condition": "#Help.Score >= 0.75",
+      "actions": [
+        {
+          "$type": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "857311",
+            "name": "Begin a new dialog"
+          },
+          "activityProcessed": true,
+          "dialog": "Help"
+        }
+      ],
+      "intent": "Help"
+    },
+    {
+      "$type": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "536236"
+      },
+      "condition": "#PasswordReset.Score > 0.6",
+      "actions": [
+        {
+          "$type": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "369728",
+            "name": "Begin a new dialog"
+          },
+          "activityProcessed": true,
+          "dialog": "resetPassword"
+        }
+      ],
+      "intent": "PasswordReset"
+    },
+    {
+      "$type": "Microsoft.OnUnknownIntent",
+      "$designer": {
+        "id": "357037"
+      },
+      "actions": [
+        {
+          "$type": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "545542",
+            "name": "Begin a new dialog"
+          },
+          "activityProcessed": true,
+          "dialog": "Help"
+        }
+      ]
+    }
+  ],
+  "$schema": "https://raw.githubusercontent.com/microsoft/BotFramework-Composer/stable/Composer/packages/server/schemas/sdk.schema",
+  "generator": "Main.lg"
+}
