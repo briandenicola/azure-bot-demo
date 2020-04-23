@@ -1,20 +1,21 @@
 # Introduction
 
-Bot Framework bot sample with Azure AD Authentication
+A sample Bot based on the Bot Framework that resets your password* with Azure AD Authentication
+_Actual account passwords are not reset_
 
 # Setup
 ## Manual Steps
     * Create Azure AD Service Principal for Bot
-        * $botPass = New-Password -Length 25 (Function from bjd.Common.Functions)
+        * $botPass = New-Password -Length 16 (Function from bjd.Common.Functions)
         * $botAppId = $(az ad app create --display-name bjdBotApp01 --password $botPass --available-to-other-tenants  --query 'appId' -o tsv) 
     * Create Azure AD Service Principal for Bot Authentication 
-        * $botAuthPass = New-Password -Length 25 (Function from bjd.Common.Functions)
+        * $botAuthPass = New-Password -Length 16 (Function from bjd.Common.Functions PowerShell module)
         * $botAuthId = $(az ad app create --display-name bjdBotAuth01 --password $botAuthPass --reply-urls https://token.botframework.com/.auth/web/redirect --required-resource-accesses @infrastructure\azuread-manifest.json --query 'appId' -o tsv) 
 
 ## ARM Template 
     * cd infrastructure 
-    * New-AzResourceGroup -Name BOT_RG -Location southcentralus
-    * New-AzResourceGroupDeployment -Name bot -ResourceGroupName BOT_RG -TemplateParameterFile .\azuredeploy.parameters.json -TemplateFile .\azuredeploy.json -botApplicationId $botAppId -botApplicationSecret (ConvertTo-SecureString -String $botPass -AsPlainText -Force) -Verbose
+    * az group create --name BOT_RG --location southcentralus
+    * az group deployment create --name bot -g BOT_RG --parameters @azuredeploy.parameters.json --template-file .\azuredeploy.json --parameters botApplicationId=$botAppId botApplicationSecret=$botPass --verbose
 
 ## Post Template Configuration
     * Bot Service (https://portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.BotService%2FbotServices)
@@ -35,11 +36,9 @@ Bot Framework bot sample with Azure AD Authentication
     * Luis (https://luis.ai)
         * Select the Subscription and the correct Authoring LUIS application
         * Import application 
-        * Select Models\FlightBooking.json
+        * Select Models\PasswordReset.json
         * Train 
         * Publish > Production 
-        * Copy Application ID from the Luis Portal under Manage
-        * az webapp config appsettings set -n {{AzureAppServiceName}} -g BOT_RG --settings LuisAppId={{LuidAppId}}
     
 # Deploy
     * Use Azure DevOps Pipeline with deploy\azure-pipeline.yaml

@@ -27,8 +27,8 @@
     },
     "variables": {
         "WebChatChannelPreview": true,
-        "luisLocation": "westus",
-        "luisHostName": "[concat(variables('luisLocation'),'.api.cognitive.microsoft.com')]"
+        "luisAuthorLocation": "westus",
+        "luisEndPoint": "[concat(parameters('luisName'),'.cognitiveservices.azure.com/')]"
     },
     "resources": [
         {
@@ -75,12 +75,25 @@
         {
             "type": "Microsoft.CognitiveServices/accounts",
             "apiVersion": "2017-04-18",
-            "name": "[parameters('luisName')]",
-            "location": "[variables('luisLocation')]",
+            "name": "[concat(parameters('luisName'),'-auhoring')]",
+            "location": "[variables('luisAuthorLocation')]",
             "sku": {
                 "name": "F0"
             },
             "kind": "LUIS.Authoring",
+            "properties": {
+                "customSubDomainName": "[concat(parameters('luisName'),'-auhoring')]"
+            }
+        },
+        {
+            "type": "Microsoft.CognitiveServices/accounts",
+            "apiVersion": "2017-04-18",
+            "name": "[parameters('luisName')]",
+            "location": "[parameters('location')]",
+            "sku": {
+                "name": "F0"
+            },
+            "kind": "LUIS",
             "properties": {
                 "customSubDomainName": "[parameters('luisName')]"
             }
@@ -157,9 +170,8 @@
                     "[concat('Microsoft.CognitiveServices/accounts/', parameters('luisName'))]"
             ],
             "properties" : {
-                "LuisAPIHostName": "[variables('luisHostName')]",
-                "LuisAPIKey": "[listKeys(parameters('luisName'),'2017-04-18').key1]",
-                "LuisAppId": "Update this with Application ID for bot from luis.ai portal",
+                "luis:endpoint": "[variables('luisEndPoint')]",
+                "luis:endpointKey": "[listKeys(parameters('luisName'),'2017-04-18').key1]",
                 "MicrosoftAppId": "[parameters('botApplicationId')]",
                 "MicrosoftAppPassword": "[parameters('botApplicationSecret')]",
                 "ConnectionName": "AzureAD",
