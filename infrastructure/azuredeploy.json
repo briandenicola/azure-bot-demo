@@ -175,7 +175,9 @@
                 "MicrosoftAppId": "[parameters('botApplicationId')]",
                 "MicrosoftAppPassword": "[parameters('botApplicationSecret')]",
                 "ConnectionName": "AzureAD",
-                "WebBotName": "[parameters('botName')]"
+                "WebBotName": "[parameters('botName')]",
+                "bot": "ComposerDialogs",
+                "cosmosdb:authkey": ""
             }
         }
     ]
