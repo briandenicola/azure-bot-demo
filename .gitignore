@@ -291,3 +291,6 @@ env/
 obj/Debug/netcoreapp2.1/CoreBot.assets.cache
 obj/Debug/netcoreapp2.1/CoreBot.csprojAssemblyReference.cache
 appsettings.json
+
+.fake
+.ionide
