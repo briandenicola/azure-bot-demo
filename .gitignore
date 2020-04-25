@@ -10,7 +10,7 @@
 *.*.cache 
 
 # dotnet core app settings
-appsettings.json
+#appsettings.json
 /*/appsettings.production.json
 /*/appsettings.development.json
 
@@ -290,7 +290,7 @@ __pycache__/
 env/
 obj/Debug/netcoreapp2.1/CoreBot.assets.cache
 obj/Debug/netcoreapp2.1/CoreBot.csprojAssemblyReference.cache
-appsettings.json
+#appsettings.json
 
 .fake
 .ionide
