@@ -7,10 +7,12 @@ _Actual account passwords are not reset_
 ## Manual Steps
 * Create Azure AD Service Principal for Bot
     * $botPass = New-Password -Length 25 (Function from bjd.Common.Functions. Ensure password does not content $ or spaces)
-    * $botAppId = $(az ad app create --display-name bjdBotApp01 --password $botPass --available-to-other-tenants  --query 'appId' -o tsv) 
+    * az ad app create --display-name bjdBotApp01 --password $botPass --available-to-other-tenants  --query 'appId' -o tsv
 * Create Azure AD Service Principal for Bot Authentication 
+    * $botAppId = az ad app list --display-name bjdBotApp01 --query '[].appId' -o tsv
     * $botAuthPass = New-Password -Length 16 (Function from bjd.Common.Functions PowerShell module. Ensure password does not content $ or spaces)
-    * $botAuthId = $(az ad app create --display-name bjdBotAuth01 --password $botAuthPass --reply-urls https://token.botframework.com/.auth/web/redirect --required-resource-accesses `@infrastructure\azuread-manifest.json --query 'appId' -o tsv) 
+    * az ad app create --display-name bjdBotAuth01 --password $botAuthPass --reply-urls https://token.botframework.com/.auth/web/redirect --required-resource-accesses @infrastructure\azuread-manifest.json
+    * $botAuthId = az ad app list --display-name bjdBotAuth01 --query '[].appId' -o tsv
 
 ## ARM Template 
 * cd infrastructure 
