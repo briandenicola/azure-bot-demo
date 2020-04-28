@@ -52,7 +52,7 @@ _Actual account passwords are not reset_
     * dotnet publish -o publish
     * Compress-Archive -Path .\publish\* -DestinationPath bot.zip
     * az webapp deployment source config-zip --resource-group BOT_RG --name bjdbot010-api --src .\bot.zip
-    * az web
+
 * Azure DevOps Pipeline 
     * Create new pipeline from deploy\azure-pipeline.yaml
     * Update Variables for Service Connection and Azure App Service Name 
