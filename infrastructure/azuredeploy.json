@@ -91,7 +91,7 @@
             "name": "[parameters('luisName')]",
             "location": "[parameters('location')]",
             "sku": {
-                "name": "F0"
+                "name": "S0"
             },
             "kind": "LUIS",
             "properties": {
