@@ -6,16 +6,16 @@ _Actual account passwords are not reset_
 # Setup
 ## Manual Steps
 * Create Azure AD Service Principal for Bot
-    * $botPass = New-Password -Length 16 (Function from bjd.Common.Functions)
+    * $botPass = New-Password -Length 25 (Function from bjd.Common.Functions. Ensure password does not content $ or spaces)
     * $botAppId = $(az ad app create --display-name bjdBotApp01 --password $botPass --available-to-other-tenants  --query 'appId' -o tsv) 
 * Create Azure AD Service Principal for Bot Authentication 
-    * $botAuthPass = New-Password -Length 16 (Function from bjd.Common.Functions PowerShell module)
-    * $botAuthId = $(az ad app create --display-name bjdBotAuth01 --password $botAuthPass --reply-urls https://token.botframework.com/.auth/web/redirect --required-resource-accesses @infrastructure\azuread-manifest.json --query 'appId' -o tsv) 
+    * $botAuthPass = New-Password -Length 16 (Function from bjd.Common.Functions PowerShell module. Ensure password does not content $ or spaces)
+    * $botAuthId = $(az ad app create --display-name bjdBotAuth01 --password $botAuthPass --reply-urls https://token.botframework.com/.auth/web/redirect --required-resource-accesses `@infrastructure\azuread-manifest.json --query 'appId' -o tsv) 
 
 ## ARM Template 
 * cd infrastructure 
 * az group create --name BOT_RG --location southcentralus
-* az group deployment create --name bot -g BOT_RG --parameters @azuredeploy.parameters.json --template-file .\azuredeploy.json --parameters botApplicationId=$botAppId botApplicationSecret=$botPass --verbose
+* az group deployment create --name bot -g BOT_RG --parameters `@azuredeploy.parameters.json --template-file .\azuredeploy.json --parameters botApplicationId=$botAppId botApplicationSecret=$botPass --verbose
 
 ## Post Template Configuration
 * Access [Bot Service](https://portal.azure.com/#blade/HubsExtension/BrowseResourceBlade/resourceType/Microsoft.BotService%2FbotServices)
