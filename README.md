@@ -41,7 +41,9 @@ _Actual account passwords are not reset_
     * Select Models\PasswordReset.json
     * Train 
     * Publish > Production 
-    
+    * Copy Application ID from the Luis Portal under Manage
+    * az webapp config appsettings set -n {{AzureAppServiceName}} -g BOT_RG --settings luis:Main_en-us_lu={{LuidAppId}}
+
 # Deploy Bot Code
 * Command Line
     * Update wwwroot\index.html with proper Bot Name
@@ -50,6 +52,7 @@ _Actual account passwords are not reset_
     * dotnet publish -o publish
     * Compress-Archive -Path .\publish\* -DestinationPath bot.zip
     * az webapp deployment source config-zip --resource-group BOT_RG --name bjdbot010-api --src .\bot.zip
+    * az web
 * Azure DevOps Pipeline 
     * Create new pipeline from deploy\azure-pipeline.yaml
     * Update Variables for Service Connection and Azure App Service Name 

@@ -172,11 +172,13 @@
             "properties" : {
                 "luis:endpoint": "[variables('luisEndPoint')]",
                 "luis:endpointKey": "[listKeys(parameters('luisName'),'2017-04-18').key1]",
+                "luis:Main_en-us_lu": "Replace Me with Luis Application ID",
                 "MicrosoftAppId": "[parameters('botApplicationId')]",
                 "MicrosoftAppPassword": "[parameters('botApplicationSecret')]",
                 "ConnectionName": "AzureAD",
                 "WebBotName": "[parameters('botName')]",
                 "bot": "ComposerDialogs",
+                
                 "cosmosdb:authkey": ""
             }
         }
