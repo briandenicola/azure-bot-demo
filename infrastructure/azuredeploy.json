@@ -28,7 +28,7 @@
     "variables": {
         "WebChatChannelPreview": true,
         "luisAuthorLocation": "westus",
-        "luisEndPoint": "[concat(parameters('luisName'),'.cognitiveservices.azure.com/')]"
+        "luisEndPoint": "[concat('https://', parameters('luisName'),'.cognitiveservices.azure.com/')]"
     },
     "resources": [
         {
