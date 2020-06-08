@@ -6,7 +6,7 @@ _Actual account passwords are not reset_
 ## Update - 5/29/2020
 * This demo was created usign a pre-release version of the BotFramework Composer therefore the ComposerDialogs can not be imported into the GA release of the Composer.
 * The code can be built and deployed as is but manual work will be needed to update the code/dialogs to 1.0 of Botframework Composer
-* [Bot Translator](https://github.com/bjd145/azure-bot-translator-demo) has been upgraded to the latest code base
+* [Bot Translator](https://github.com/briandenicola/azure-bot-translator-demo) has been upgraded to the latest code base
 
 # Setup
 ## Manual Steps
